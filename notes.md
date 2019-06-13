@@ -26,3 +26,11 @@ The main difference between using sessions and tokes for auth: where the state i
 - auth token
 - access/authorization token - could be 60 mins, you trust this
 - refresh token - long lived, perhaps 9 hours
+
+
+
+// yarn create react-app client
+// cd into client
+// yarn start
+// yarn run
+// another terminal do yarn server
