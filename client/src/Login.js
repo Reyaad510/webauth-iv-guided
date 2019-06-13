@@ -1,4 +1,6 @@
 import React from 'react';
+import api from './helpers/api';
+import { withRouter } from 'react-router-dom';
 
 class Login extends React.Component {
     state = {
@@ -6,9 +8,27 @@ class Login extends React.Component {
         password: ''
     }
 
-    handleSubmit = (ev) => {
+    handleSubmit = async (ev) => {
         ev.preventDefault();
         console.log(this.state);
+
+        try {
+            const { username, password } = this.state
+            
+           
+          const result = await api.post('/auth/login', {
+              username,
+              password,
+            //   username: this.state.username,
+            //   password: this.state.password
+          });
+          console.log(result);
+         
+          localStorage.setItem('token', result.data.token);
+          this.props.history.push('/users')
+        } catch(err) {
+            console.log(err)
+        }
     }
 
     handleChange = ev => {
@@ -29,7 +49,7 @@ class Login extends React.Component {
                      value={this.state.username} 
                      placeholder= 'Username'
                      />
-                <input type='text'
+                <input type='password'
                      name='password'
                      onChange={this.handleChange}
                      value={this.state.password} 
@@ -43,4 +63,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default withRouter(Login);
