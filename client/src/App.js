@@ -1,10 +1,18 @@
 import React from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, withRouter } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 import Users from './Users';
 
-function App() {
+class App extends React.Component {
+
+  logout = () => {
+    localStorage.removeItem('token');
+    this.props.history.push('/login')
+  }
+
+  render() {
+
   return (
     <div>
       <h1> Welcome </h1>
@@ -13,6 +21,7 @@ function App() {
         <li><NavLink to='/login'>Login</NavLink></li>
         <li><NavLink to='/signup'>Signup</NavLink></li>
         <li><NavLink to='/users'>Users</NavLink></li>
+        <li><button onClick={this.logout}>Logout</button></li>
       </ul>
 
 
@@ -23,6 +32,7 @@ function App() {
       </main>
     </div>
   );
+  }
 }
 
-export default App;
+export default withRouter(App);
