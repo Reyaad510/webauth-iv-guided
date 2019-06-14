@@ -34,3 +34,5 @@ The main difference between using sessions and tokes for auth: where the state i
 // yarn start
 // yarn run
 // another terminal do yarn server
+// yarn knex migrate:make users_fullname
+// yarn knex migrate:latest   after put in info in table
